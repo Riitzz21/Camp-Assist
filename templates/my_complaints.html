@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-card">
+
+    <h1>My Complaints</h1>
+
+    <p>Track your complaints and monitor maintenance progress.</p>
+
+    {% if complaints %}
+
+    <div class="table-container">
+
+        <table class="complaints-table">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Priority</th>
+                    <th>Current Status</th>
+                    <th>Assigned Staff</th>
+                    <th>Maintenance Remarks</th>
+                    <th>Feedback</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for complaint in complaints %}
+
+                <tr>
+
+                    <td>{{ complaint.id }}</td>
+
+                    <td>{{ complaint.title }}</td>
+
+                    <td>{{ complaint.category_name }}</td>
+
+                    <td>{{ complaint.description }}</td>
+
+                    <td>{{ complaint.location }}</td>
+
+                    <td>{{ complaint.priority }}</td>
+
+                    <td>
+                        <strong>{{ complaint.status }}</strong>
+                    </td>
+
+                    <td>
+                        {{ complaint.assigned_staff or 'Not assigned' }}
+                    </td>
+
+                    <td>
+                        {{ complaint.work_remarks or 'No remarks yet' }}
+                    </td>
+
+                    <td>
+                        {% if complaint.status == 'resolved' %}
+
+                            <a href="{{ url_for('submit_feedback', complaint_id=complaint.id) }}"
+                               class="btn">
+                                Give Feedback
+                            </a>
+
+                        {% else %}
+
+                            <span>Available after resolution</span>
+
+                        {% endif %}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+        <p>You have not submitted any complaints yet.</p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-card">
+
+    <div class="auth-brand">
+        <img
+            src="{{ url_for('static', filename='Camp-Assist_Logo.png') }}"
+            alt="Camp-Assist Logo"
+            class="auth-logo"
+        >
+        <h2>Camp-Assist</h2>
+        <p>College Complaint & Maintenance Portal</p>
+    </div>
+    <h2>Create Your Account</h2>
+    <p>Register as a Student or Faculty member.</p>
+
+    <form method="POST" action="{{ url_for('register') }}">
+
+        <label>Full Name</label>
+        <input type="text" name="name"
+               placeholder="Enter your full name" required>
+
+        <label>Email Address</label>
+        <input type="email" name="email"
+               placeholder="Enter your email" required>
+
+        <label>Password</label>
+        <input type="password" name="password"
+               placeholder="Create a strong password"
+               minlength="8" required>
+
+        <label>Department</label>
+        <input type="text" name="department"
+               placeholder="Enter your department">
+
+        <label>Register As</label>
+        <select name="role" required>
+            <option value="">Select Role</option>
+            <option value="student">Student</option>
+            <option value="faculty">Faculty</option>
+        </select>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <p>
+        Already have an account?
+        <a href="{{ url_for('login') }}">Login Here</a>
+    </p>
+</div>
+
+{% endblock %}

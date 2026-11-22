@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-card">
+    <h2>Submit a New Complaint</h2>
+
+    <p>Report a college maintenance issue below.</p>
+
+    <form method="POST" action="{{ url_for('new_complaint') }}">
+
+        <label>Complaint Title</label>
+        <input
+            type="text"
+            name="title"
+            placeholder="Enter complaint title"
+            maxlength="200"
+            required
+        >
+
+        <label>Complaint Category</label>
+        <select name="category_id" required>
+            <option value="">Select Category</option>
+
+            {% for category in categories %}
+                <option value="{{ category.id }}">
+                    {{ category.name }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+        <label>Description</label>
+        <textarea
+            name="description"
+            rows="5"
+            placeholder="Describe your problem..."
+            required
+        ></textarea>
+
+        <label>Location</label>
+        <input
+            type="text"
+            name="location"
+            placeholder="e.g. Computer Lab, Room 204"
+            maxlength="200"
+            required
+        >
+
+        <label>Priority</label>
+        <select name="priority" required>
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+        </select>
+
+        <button type="submit">Submit Complaint</button>
+
+    </form>
+
+    <p>
+        <a href="{{ url_for('dashboard') }}">
+            Back to Dashboard
+        </a>
+    </p>
+</div>
+
+{% endblock %}

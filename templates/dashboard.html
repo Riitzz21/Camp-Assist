@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-card">
+
+    <div class="dashboard-buttons">
+
+        <a href="{{ url_for('new_complaint') }}" class="btn">
+            Submit New Complaint
+        </a>
+
+        <a href="{{ url_for('my_complaints') }}" class="btn">
+            My Complaints
+        </a>
+
+    </div>
+
+    <h1>Welcome, {{ name }}!</h1>
+
+    <p>Your account role: <strong>{{ role|title }}</strong></p>
+
+    <h3>Smart College Complaint & Maintenance System</h3>
+
+    <p>Your account has been created successfully.</p>
+
+    <a class="logout-btn" href="{{ url_for('logout') }}">
+        Logout
+    </a>
+
+</div>
+
+{% endblock %}

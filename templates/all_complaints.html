@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-card">
+
+    <h1>All College Complaints</h1>
+
+    <p>View, assign and monitor complaints submitted by students and faculty.</p>
+
+    {% if complaints %}
+
+    <div class="table-container">
+
+        <table  class="admin-complaints-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Submitted By</th>
+                    <th>Category</th>
+                    <th>Location</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Assigned Staff</th>
+                    <th>Work Remarks</th>
+                    <th>Status History</th>
+                    <th>Date</th>
+                    <th>Assign Staff</th>
+                    <th>Update Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for complaint in complaints %}
+
+                <tr>
+                    <!-- Complaint ID -->
+                    <td>{{ complaint.id }}</td>
+
+                    <!-- Complaint Title -->
+                    <td>{{ complaint.title }}</td>
+
+                    <!-- Student or Faculty Details -->
+                    <td>
+                        {{ complaint.student_name }}<br>
+                        <small>{{ complaint.student_email }}</small>
+                    </td>
+
+                    <!-- Category -->
+                    <td>{{ complaint.category_name }}</td>
+
+                    <!-- Location -->
+                    <td>{{ complaint.location }}</td>
+
+                    <!-- Priority -->
+                    <td>{{ complaint.priority }}</td>
+
+                    <!-- Current Status -->
+                    <td>{{ complaint.status }}</td>
+
+                    <!-- Assigned Staff -->
+                    <td>
+                        {{ complaint.assigned_staff or 'Not assigned' }}
+                    </td>
+
+                    <!-- Maintenance Work Remarks -->
+                    <td>
+                        {{ complaint.work_remarks or 'No remarks yet' }}
+                    </td>
+
+                    <!-- Status History -->
+                    <td>
+                        {% if complaint.status_history %}
+                            {{ complaint.status_history }}
+                        {% else %}
+                            No history available
+                        {% endif %}
+                    </td>
+
+                    <!-- Complaint Date -->
+                    <td>{{ complaint.created_at }}</td>
+
+                    <!-- Assign Staff Form -->
+                    <td>
+                        <form method="POST"
+                              action="{{ url_for('assign_complaint', complaint_id=complaint.id) }}">
+
+                            <select name="staff_id" required>
+                                <option value="">Select Staff</option>
+
+                                {% for staff in staff_members %}
+                                <option value="{{ staff.id }}">
+                                    {{ staff.name }}
+                                </option>
+                                {% endfor %}
+
+                            </select>
+
+                            <textarea
+                                name="notes"
+                                placeholder="Assignment notes"
+                                rows="2"></textarea>
+
+                            <button type="submit" class="btn">
+                                Assign Staff
+                            </button>
+
+                        </form>
+                    </td>
+
+                    <!-- Update Status Form -->
+                    <td>
+                        <form method="POST"
+                              action="{{ url_for('update_complaint_status', complaint_id=complaint.id) }}">
+
+                            <select name="status" required>
+
+                                <option value="pending"
+                                    {% if complaint.status == 'pending' %}selected{% endif %}>
+                                    Pending
+                                </option>
+
+                                <option value="assigned"
+                                    {% if complaint.status == 'assigned' %}selected{% endif %}>
+                                    Assigned
+                                </option>
+
+                                <option value="in_progress"
+                                    {% if complaint.status == 'in_progress' %}selected{% endif %}>
+                                    In Progress
+                                </option>
+
+                                <option value="resolved"
+                                    {% if complaint.status == 'resolved' %}selected{% endif %}>
+                                    Resolved
+                                </option>
+
+                                <option value="rejected"
+                                    {% if complaint.status == 'rejected' %}selected{% endif %}>
+                                    Rejected
+                                </option>
+
+                            </select>
+
+                            <textarea
+                                name="remarks"
+                                placeholder="Enter status remarks"
+                                rows="2"></textarea>
+
+                            <button type="submit" class="btn">
+                                Update Status
+                            </button>
+
+                        </form>
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+    {% else %}
+
+        <p>No complaints have been submitted yet.</p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{{ url_for('admin_dashboard') }}" class="btn">
+        Back to Admin Dashboard
+    </a>
+
+</div>
+
+{% endblock %}

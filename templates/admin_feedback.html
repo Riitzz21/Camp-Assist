@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-card">
+
+    <h1>Student & Faculty Feedback</h1>
+
+    <p>Monitor ratings and feedback submitted after complaint resolution.</p>
+
+    {% if feedback_list %}
+
+    <div class="table-container">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Feedback ID</th>
+                    <th>Complaint ID</th>
+                    <th>Complaint Title</th>
+                    <th>Submitted By</th>
+                    <th>Email</th>
+                    <th>Rating</th>
+                    <th>Comments</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for feedback in feedback_list %}
+                <tr>
+
+                    <td>{{ feedback.id }}</td>
+
+                    <td>{{ feedback.complaint_id }}</td>
+
+                    <td>{{ feedback.complaint_title }}</td>
+
+                    <td>{{ feedback.user_name }}</td>
+
+                    <td>{{ feedback.user_email }}</td>
+
+                    <td>
+                        {{ '★' * feedback.rating }}
+                        ({{ feedback.rating }}/5)
+                    </td>
+
+                    <td>
+                        {{ feedback.comments or 'No comments' }}
+                    </td>
+
+                    <td>{{ feedback.created_at }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    {% else %}
+
+        <p>No feedback has been submitted yet.</p>
+
+    {% endif %}
+
+    <br>
+
+    <a href="{{ url_for('admin_dashboard') }}" class="btn">
+        Back to Admin Dashboard
+    </a>
+
+</div>
+
+{% endblock %}

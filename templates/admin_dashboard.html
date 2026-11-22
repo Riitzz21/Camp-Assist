@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="dashboard-card">
+
+        <h1>Welcome, Admin {{ name }}!</h1>
+
+        <h3>Smart College Complaint & Maintenance System</h3>
+
+        <p>Manage and monitor all college maintenance complaints.</p>
+
+        <!-- COMPLAINT STATISTICS -->
+        <h2>Complaint Statistics</h2>
+
+        <div class="analytics-grid">
+
+            <div class="analytics-card">
+                <h3>Total Complaints</h3>
+                <h2>{{ complaint_stats.total_complaints or 0 }}</h2>
+            </div>
+
+            <div class="analytics-card">
+                <h3>Pending</h3>
+                <h2>{{ complaint_stats.pending_complaints or 0 }}</h2>
+            </div>
+
+            <div class="analytics-card">
+                <h3>Assigned</h3>
+                <h2>{{ complaint_stats.assigned_complaints or 0 }}</h2>
+            </div>
+
+            <div class="analytics-card">
+                <h3>In Progress</h3>
+                <h2>{{ complaint_stats.in_progress_complaints or 0 }}</h2>
+            </div>
+
+            <div class="analytics-card">
+                <h3>Resolved</h3>
+                <h2>{{ complaint_stats.resolved_complaints or 0 }}</h2>
+            </div>
+
+            <div class="analytics-card">
+                <h3>Rejected</h3>
+                <h2>{{ complaint_stats.rejected_complaints or 0 }}</h2>
+            </div>
+
+        </div>
+
+        <!-- USER STATISTICS -->
+        <h2>User Statistics</h2>
+
+        <div class="analytics-grid">
+
+            <div class="analytics-card">
+                <h3>Total Students</h3>
+                <h2>{{ user_stats.total_students or 0 }}</h2>
+            </div>
+
+            <div class="analytics-card">
+                <h3>Total Faculty</h3>
+                <h2>{{ user_stats.total_faculty or 0 }}</h2>
+            </div>
+
+            <div class="analytics-card">
+                <h3>Maintenance Staff</h3>
+                <h2>{{ user_stats.total_staff or 0 }}</h2>
+            </div>
+
+        </div>
+
+        <!-- FEEDBACK OVERVIEW -->
+        <h2>Feedback Overview</h2>
+
+        <div class="analytics-grid">
+
+            <div class="analytics-card">
+                <h3>Total Feedback</h3>
+                <h2>{{ feedback_stats.total_feedback or 0 }}</h2>
+            </div>
+
+            <div class="analytics-card">
+                <h3>Average Rating</h3>
+                <h2>{{ "%.2f"|format(feedback_stats.average_rating or 0) }}/5</h2>
+            </div>
+
+        </div>
+
+        <!-- VISUAL ANALYTICS -->
+        <h2>Visual Analytics</h2>
+
+        <div class="analytics-grid chart-grid">
+
+            <!-- Complaint Status Chart -->
+            <div class="analytics-card chart-card">
+                <h3>Complaint Status Distribution</h3>
+                <canvas id="complaintStatusChart"></canvas>
+            </div>
+
+            <!-- User Distribution Chart -->
+            <div class="analytics-card chart-card">
+                <h3>User Distribution</h3>
+                <canvas id="userDistributionChart"></canvas>
+            </div>
+
+            <!-- Feedback Rating Chart -->
+            <div class="analytics-card chart-card">
+                <h3>Feedback Rating Distribution</h3>
+                <canvas id="feedbackRatingChart"></canvas>
+            </div>
+
+        </div>
+
+        <!-- ADMIN CONTROLS -->
+        <h2>Admin Controls</h2>
+
+        <div class="dashboard-buttons">
+
+            <a href="{{ url_for('all_complaints') }}" class="btn">
+                View All Complaints
+            </a>
+
+            <a href="{{ url_for('manage_staff') }}" class="btn">
+                Manage Staff
+            </a>
+
+            <a href="{{ url_for('admin_feedback') }}" class="btn">
+                View Student Feedback
+            </a>
+
+        </div>
+
+        <br>
+
+        <a href="{{ url_for('logout') }}" class="btn logout-btn">
+            Logout
+        </a>
+
+    </div>
+</div>
+
+
+<!-- CHART.JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // 1. COMPLAINT STATUS DISTRIBUTION
+
+    const complaintStatusCanvas =
+        document.getElementById("complaintStatusChart");
+
+    new Chart(complaintStatusCanvas, {
+
+        type: "doughnut",
+
+        data: {
+            labels: [
+                "Pending",
+                "Assigned",
+                "In Progress",
+                "Resolved",
+                "Rejected"
+            ],
+
+            datasets: [{
+                label: "Complaints",
+
+                data: [
+                    {{ complaint_stats.pending_complaints or 0 }},
+                    {{ complaint_stats.assigned_complaints or 0 }},
+                    {{ complaint_stats.in_progress_complaints or 0 }},
+                    {{ complaint_stats.resolved_complaints or 0 }},
+                    {{ complaint_stats.rejected_complaints or 0 }}
+                ],
+
+                backgroundColor: [
+                    "#facc15",
+                    "#3b82f6",
+                    "#f97316",
+                    "#22c55e",
+                    "#ef4444"
+                ],
+
+                borderWidth: 1
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+
+    });
+
+
+    // 2. USER DISTRIBUTION
+
+    const userDistributionCanvas =
+        document.getElementById("userDistributionChart");
+
+    new Chart(userDistributionCanvas, {
+
+        type: "bar",
+
+        data: {
+            labels: [
+                "Students",
+                "Faculty",
+                "Maintenance Staff"
+            ],
+
+            datasets: [{
+                label: "Number of Users",
+
+                data: [
+                    {{ user_stats.total_students or 0 }},
+                    {{ user_stats.total_faculty or 0 }},
+                    {{ user_stats.total_staff or 0 }}
+                ],
+
+                backgroundColor: [
+                    "#3b82f6",
+                    "#8b5cf6",
+                    "#22c55e"
+                ],
+
+                borderWidth: 1
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+
+    });
+
+
+    // 3. FEEDBACK RATING DISTRIBUTION
+
+    const feedbackRatingCanvas =
+        document.getElementById("feedbackRatingChart");
+
+    new Chart(feedbackRatingCanvas, {
+
+        type: "bar",
+
+        data: {
+            labels: [
+                "1 Star",
+                "2 Stars",
+                "3 Stars",
+                "4 Stars",
+                "5 Stars"
+            ],
+
+            datasets: [{
+                label: "Number of Ratings",
+
+                data: {{ rating_counts | tojson }},
+
+                backgroundColor: [
+                    "#ef4444",
+                    "#f97316",
+                    "#eab308",
+                    "#3b82f6",
+                    "#22c55e"
+                ],
+
+                borderWidth: 1
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            }
+        }
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,945 @@
+/* =========================================================
+   SMART COLLEGE COMPLAINT & MAINTENANCE MANAGEMENT SYSTEM
+   Main stylesheet
+   ========================================================= */
+
+/* ---------- Global styles ---------- */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    line-height: 1.5;
+}
+
+img,
+canvas {
+    max-width: 100%;
+}
+
+/* ---------- Navigation bar ---------- */
+.navbar {
+    background: #173b67;
+    color: #ffffff;
+    padding: 18px 8%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.navbar h2 {
+    margin: 0 auto 0 0;
+}
+
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Main page containers ---------- */
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 45px auto;
+}
+
+.form-card,
+.dashboard-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    min-width: 0;
+}
+
+.form-card h2,
+.dashboard-card h1 {
+    color: #173b67;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    line-height: 1.25;
+}
+
+/* ---------- Forms and form controls ---------- */
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+     margin-top: 7px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font: inherit;
+    color: #1e293b;
+    background: #ffffff;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid rgba(23, 105, 170, 0.2);
+    border-color: #1769aa;
+}
+
+/* ---------- Buttons and links styled as buttons ---------- */
+button,
+.btn,
+.logout-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #1765a5;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font: inherit;
+    text-align: center;
+}
+
+button {
+    margin-top: 22px;
+    width: 100%;
+}
+
+.btn,
+.logout-btn {
+    margin-top: 0;
+}
+
+button:hover,
+.btn:hover,
+.logout-btn:hover {
+    background: #104878;
+    color: #ffffff;
+}
+
+/* ---------- Flash messages ---------- */
+.message {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ---------- Dashboard action buttons ---------- */
+.dashboard-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.dashboard-buttons .btn {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #1769aa;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+
+.dashboard-buttons .btn:hover {
+    background-color: #124d80;
+}
+
+/* ---------- Tables ---------- */
+.table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-container table {
+    width: 100%;
+    min-width: 750px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.table-container th,
+.table-container td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+
+.table-container th {
+    background-color: #1b3d68;
+    color: #ffffff;
+    vertical-align: middle;
+}
+
+.table-container tr:hover {
+    background-color: #f2f6fa;
+}
+
+.table-container small {
+    color: #666666;
+    font-size: 12px;
+}
+
+/*
+   Admin complaints table:
+   This table has 13 columns, so it intentionally scrolls horizontally.
+   The width rules below keep the columns readable instead of squeezing
+   every column into the card.
+*/
+.table-container.admin-complaints-table table,
+.table-container:has(.admin-complaints-table) table {
+    min-width: 2200px;
+}
+
+/* Individual admin complaint column widths */
+.table-container table.admin-complaints-table {
+    min-width: 2200px;
+}
+
+.admin-complaints-table th:nth-child(1),
+.admin-complaints-table td:nth-child(1) {
+    width: 60px;
+}
+
+.admin-complaints-table th:nth-child(2),
+.admin-complaints-table td:nth-child(2) {
+    width: 170px;
+}
+
+.admin-complaints-table th:nth-child(3),
+.admin-complaints-table td:nth-child(3) {
+    width: 190px;
+}
+
+.admin-complaints-table th:nth-child(4),
+.admin-complaints-table td:nth-child(4) {
+    width: 120px;
+}
+
+.admin-complaints-table th:nth-child(5),
+.admin-complaints-table td:nth-child(5) {
+    width: 130px;
+}
+
+.admin-complaints-table th:nth-child(6),
+.admin-complaints-table td:nth-child(6) {
+    width: 90px;
+}
+
+.admin-complaints-table th:nth-child(7),
+.admin-complaints-table td:nth-child(7) {
+    width: 110px;
+}
+
+.admin-complaints-table th:nth-child(8),
+.admin-complaints-table td:nth-child(8) {
+    width: 180px;
+}
+
+.admin-complaints-table th:nth-child(9),
+.admin-complaints-table td:nth-child(9) {
+    width: 280px;
+}
+
+.admin-complaints-table th:nth-child(10),
+.admin-complaints-table td:nth-child(10) {
+    width: 350px;
+}
+
+.admin-complaints-table th:nth-child(11),
+.admin-complaints-table td:nth-child(11) {
+    width: 170px;
+}
+
+.admin-complaints-table th:nth-child(12),
+.admin-complaints-table td:nth-child(12),
+.admin-complaints-table th:nth-child(13),
+.admin-complaints-table td:nth-child(13) {
+    width: 220px;
+}
+
+/* ---------- Feedback button ---------- */
+.feedback-btn {
+    display: inline-block;
+    width: 130px;
+    min-width: 130px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+/* ---------- Admin analytics statistic cards ---------- */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 20px 0 30px;
+    width: 100%;
+}
+
+.analytics-card {
+    background-color: #f2f6fa;
+    border: 1px solid #dce5ef;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    min-width: 0;
+    }
+
+.analytics-card h3 {
+    color: #1b3d68;
+    font-size: 16px;
+    margin: 0 0 12px;
+}
+
+.analytics-card h2 {
+    color: #1769aa;
+    font-size: 30px;
+    margin: 0;
+}
+
+/* ---------- Admin visual analytics / charts ---------- */
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    width: 100%;
+    align-items: stretch;
+}
+
+.chart-card {
+    width: 100%;
+    min-width: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid #dce5ef;
+    border-radius: 10px;
+}
+
+.chart-card h3 {
+    text-align: center;
+    margin: 0 0 20px;
+    color: #1b3d68;
+}
+
+.chart-card canvas {
+    display: block;
+    width: 100% !important;
+    max-width: 100%;
+    max-height: 300px;
+}
+
+/* Support pages that use both analytics-grid and chart-grid classes */
+.analytics-grid.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 25px;
+    align-items: stretch;
+}
+
+.analytics-grid.chart-grid .chart-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 20px;
+    background: #ffffff;
+}
+
+.analytics-grid.chart-grid .chart-card canvas {
+    display: block;
+    width: 100% !important;
+    max-width: 100%;
+    height: 300px !important;
+    max-height: 300px;
+}
+
+/* ---------- Responsive layout ---------- */
+@media (max-width: 650px) {
+    .navbar {
+        padding: 16px 5%;
+        gap: 15px;
+    }
+
+    .container {
+        width: 94%;
+        margin: 25px auto;
+    }
+    .form-card,
+    .dashboard-card {
+        padding: 20px;
+    }
+
+    .analytics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .chart-grid,
+    .analytics-grid.chart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 400px) {
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .navbar h2 {
+        width: 100%;
+    }
+}
+
+/* Step 15.6 - Feedback Rating Chart */
+
+.chart-card {
+    min-height: 320px;
+}
+
+.chart-card canvas {
+    height: 250px !important;
+}
+
+/* My Complaints Table Layout Fix */
+
+.table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+.complaints-table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.complaints-table th {
+    background-color: #1b3d68;
+    color: white;
+    padding: 14px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.complaints-table td {
+    padding: 14px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+    min-width: 100px;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+.complaints-table th:nth-child(2),
+.complaints-table td:nth-child(2) {
+    min-width: 170px;
+}
+
+.complaints-table th:nth-child(4),
+.complaints-table td:nth-child(4) {
+    min-width: 250px;
+    max-width: 300px;
+}
+
+.complaints-table th:nth-child(9),
+.complaints-table td:nth-child(9) {
+    min-width: 200px;
+    max-width: 250px;
+}
+
+.complaints-table tr:hover {
+    background-color: #f2f6fa;
+}
+
+.complaints-table .btn {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+
+/* FINAL FIX - MY COMPLAINTS TABLE */
+
+.table-container {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    margin-top: 20px;
+}
+
+.table-container .complaints-table {
+    width: 1450px !important;
+    min-width: 1450px !important;
+    max-width: none !important;
+    table-layout: fixed !important;
+    border-collapse: collapse;
+}
+
+/* Table headings */
+.table-container .complaints-table th {
+    padding: 14px 12px !important;
+    background-color: #1b3d68;
+    color: white;
+    text-align: left;
+    white-space: normal !important;
+    vertical-align: middle;
+}
+
+/* Table data */
+.table-container .complaints-table td {
+    padding: 14px 12px !important;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+/* Individual column widths */
+.complaints-table th:nth-child(1),
+.complaints-table td:nth-child(1) {
+    width: 65px;
+}
+
+.complaints-table th:nth-child(2),
+.complaints-table td:nth-child(2) {
+    width: 170px;
+}
+
+.complaints-table th:nth-child(3),
+.complaints-table td:nth-child(3) {
+    width: 140px;
+}
+
+.complaints-table th:nth-child(4),
+.complaints-table td:nth-child(4) {
+    width: 260px;
+}
+
+.complaints-table th:nth-child(5),
+.complaints-table td:nth-child(5) {
+    width: 160px;
+}
+
+.complaints-table th:nth-child(6),
+.complaints-table td:nth-child(6) {
+    width: 100px;
+}
+
+.complaints-table th:nth-child(7),
+.complaints-table td:nth-child(7) {
+    width: 130px;
+}
+
+.complaints-table th:nth-child(8),
+.complaints-table td:nth-child(8) {
+    width: 170px;
+}
+
+.complaints-table th:nth-child(9),
+.complaints-table td:nth-child(9) {
+    width: 200px;
+}
+
+.complaints-table th:nth-child(10),
+.complaints-table td:nth-child(10) {
+    width: 180px;
+}
+
+.complaints-table tr:hover {
+    background-color: #f2f6fa;
+}
+
+
+/* =====================================
+   STEP 18 - RESPONSIVE DESIGN
+===================================== */
+
+/* General responsive layout */
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Main content */
+.dashboard-card {
+    width: 95%;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 25px;
+}
+
+/* Tables */
+.table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Forms */
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+
+/* Dashboard statistics */
+.stats-container,
+.statistics-container,
+.analytics-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.stat-card,
+.stat-box {
+    flex: 1 1 180px;
+    min-width: 0;
+}
+
+/* Tablet screens */
+@media screen and (max-width: 768px) {
+
+    .dashboard-card {
+        width: 96%;
+        padding: 18px;
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 21px;
+    }
+
+    .stats-container,
+    .statistics-container,
+    .analytics-container {
+        gap: 12px;
+    }
+
+}
+
+/* Mobile screens */
+@media screen and (max-width: 480px) {
+
+    .dashboard-card {
+        width: 96%;
+        padding: 14px;
+        margin: 15px auto;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 19px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .stats-container,
+    .statistics-container,
+    .analytics-container {
+        flex-direction: column;
+    }
+
+    .stat-card,
+    .stat-box {
+        width: 100%;
+    }
+
+    button,
+    .btn {
+        max-width: 100%;
+    }
+
+}
+
+
+/* =========================================
+   ADMIN COMPLAINTS TABLE - FINAL WIDTH FIX
+========================================= */
+
+.table-container {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    margin-top: 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-container table.admin-complaints-table {
+    width: 2290px !important;
+    min-width: 2290px !important;
+    max-width: none !important;
+    table-layout: fixed !important;
+    border-collapse: collapse;
+}
+
+/* All table cells */
+.admin-complaints-table th,
+.admin-complaints-table td {
+    padding: 12px !important;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid #ddd;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+/* Table headings */
+.admin-complaints-table th {
+    background: #1b3d68;
+    color: white;
+    vertical-align: middle;
+}
+
+/* Column widths */
+.admin-complaints-table th:nth-child(1),
+.admin-complaints-table td:nth-child(1) {
+    width: 60px;
+}
+
+.admin-complaints-table th:nth-child(2),
+.admin-complaints-table td:nth-child(2) {
+    width: 170px;
+}
+
+.admin-complaints-table th:nth-child(3),
+.admin-complaints-table td:nth-child(3) {
+    width: 190px;
+}
+
+.admin-complaints-table th:nth-child(4),
+.admin-complaints-table td:nth-child(4) {
+    width: 120px;
+}
+
+.admin-complaints-table th:nth-child(5),
+.admin-complaints-table td:nth-child(5) {
+    width: 130px;
+}
+
+.admin-complaints-table th:nth-child(6),
+.admin-complaints-table td:nth-child(6) {
+    width: 90px;
+}
+
+.admin-complaints-table th:nth-child(7),
+.admin-complaints-table td:nth-child(7) {
+    width: 110px;
+}
+
+.admin-complaints-table th:nth-child(8),
+.admin-complaints-table td:nth-child(8) {
+    width: 180px;
+}
+
+.admin-complaints-table th:nth-child(9),
+.admin-complaints-table td:nth-child(9) {
+    width: 280px;
+}
+
+.admin-complaints-table th:nth-child(10),
+.admin-complaints-table td:nth-child(10) {
+    width: 350px;
+}
+
+.admin-complaints-table th:nth-child(11),
+.admin-complaints-table td:nth-child(11) {
+    width: 170px;
+}
+
+.admin-complaints-table th:nth-child(12),
+.admin-complaints-table td:nth-child(12),
+.admin-complaints-table th:nth-child(13),
+.admin-complaints-table td:nth-child(13) {
+    width: 220px;
+}
+
+/* Forms inside the table */
+.admin-complaints-table select,
+.admin-complaints-table textarea {
+    width: 100%;
+    min-width: 0;
+}
+
+.admin-complaints-table button {
+    width: 100%;
+    white-space: normal;
+    word-break: normal;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: auto;
+    color: white;
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.brand img {
+    display: block;
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.brand:hover {
+    text-decoration: none;
+}
+
+
+/* Camp-Assist Login and Registration Branding */
+
+.auth-brand {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.auth-logo {
+    display: block;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: 0 auto 10px;
+}
+
+.auth-brand h2 {
+    color: #173b67;
+    font-size: 27px;
+    margin: 8px 0;
+}
+
+.auth-brand p {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0;
+}
+
+
+/* About Page and Navigation */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #25c4c7;
+}
+
+.about-page {
+    max-width: 950px;
+    margin: 35px auto;
+}
+
+.about-page h1,
+.about-page h2 {
+    color: #173b67;
+}
+
+.about-page li {
+    margin-bottom: 10px;
+}
+
+.about-tagline {
+    text-align: center;
+    background: #edf5fc;
+    padding: 22px;
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
+.about-tagline h2 {
+    color: #1769aa;
+}
+
+@media (max-width: 600px) {
+    .nav-links {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+}
